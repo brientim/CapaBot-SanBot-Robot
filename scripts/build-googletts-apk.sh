@@ -26,7 +26,7 @@ zip -u app.apk lib/armeabi-v7a/libUvcNative.so lib/armeabi/libUvcNative.so >/dev
   --ks-key-alias androiddebugkey app-aligned.apk
 "$APKSIGNER" verify app-aligned.apk
 
-OUT="$HOME/sanbot/apk/CapaBot-SanBot-Robot-6.0.4-googletts-debug.apk"
+OUT="$HOME/sanbot/apk/CapaBot-SanBot-Robot-6.0.5-googletts-debug.apk"
 cp app-aligned.apk "$BUILT"
 cp app-aligned.apk "$OUT"
 echo "Built: $OUT"

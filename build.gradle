@@ -29,8 +29,8 @@ android {
         applicationId "com.sanbot.capaBot"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 202610283
-        versionName "6.0.4-googletts" //change also proprieties.txt in Hari folder, config
+        versionCode 202610284
+        versionName "6.0.5-googletts" //change also proprieties.txt in Hari folder, config
 
         android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     }

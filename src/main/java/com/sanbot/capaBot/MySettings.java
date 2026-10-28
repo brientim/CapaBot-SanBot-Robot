@@ -391,6 +391,10 @@ public class MySettings extends TopBaseActivity {
     private static final String PREFS_NAME = "capabot_settings";
     private static final String PREF_GOOGLE_TTS_SPEAKER = "google_tts_speaker";
     private static final String PREF_GOOGLE_SPEECH_RECOGNIZER = "google_speech_recognizer";
+    private static final String PREF_CITY_WEATHER = "city_weather";
+    private static final String PREF_CITY_MAP = "city_map";
+    private static final String DEFAULT_CITY_WEATHER = "Udine,IT";
+    private static final String DEFAULT_CITY_MAP = "Udine";
     private static SharedPreferences prefs;
 
     //SPEAK settings  language/speed/intonation
@@ -471,11 +475,21 @@ public class MySettings extends TopBaseActivity {
 
     public static String getCityWeather() { return cityWeather; }
 
-    public static void setCityWeather(String cityWeather) { MySettings.cityWeather = cityWeather;}
+    public static void setCityWeather(String cityWeather) {
+        MySettings.cityWeather = cityWeather != null ? cityWeather : DEFAULT_CITY_WEATHER;
+        if (prefs != null) {
+            prefs.edit().putString(PREF_CITY_WEATHER, MySettings.cityWeather).apply();
+        }
+    }
 
-    public static String getCityMap() {return cityMap; }
+    public static String getCityMap() { return cityMap; }
 
-    public static void setCityMap(String cityMap) { MySettings.cityMap = cityMap;  }
+    public static void setCityMap(String cityMap) {
+        MySettings.cityMap = cityMap != null ? cityMap : DEFAULT_CITY_MAP;
+        if (prefs != null) {
+            prefs.edit().putString(PREF_CITY_MAP, MySettings.cityMap).apply();
+        }
+    }
 
     public static int getSeconds_waitingTouch() { return seconds_waitingTouch; }
     
@@ -539,6 +553,14 @@ public class MySettings extends TopBaseActivity {
         prefs = context.getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         googleTtsSpeakerEnabled = prefs.getBoolean(PREF_GOOGLE_TTS_SPEAKER, true);
         googleSpeechRecognizerEnabled = prefs.getBoolean(PREF_GOOGLE_SPEECH_RECOGNIZER, true);
+        cityWeather = prefs.getString(PREF_CITY_WEATHER, DEFAULT_CITY_WEATHER);
+        cityMap = prefs.getString(PREF_CITY_MAP, DEFAULT_CITY_MAP);
+        if (cityWeather == null || cityWeather.trim().isEmpty()) {
+            cityWeather = DEFAULT_CITY_WEATHER;
+        }
+        if (cityMap == null || cityMap.trim().isEmpty()) {
+            cityMap = DEFAULT_CITY_MAP;
+        }
     }
 
     public static boolean isGoogleTtsSpeakerEnabled() {
